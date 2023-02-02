@@ -1,10 +1,11 @@
-import React from "react";
-import { Box, Heading } from "@chakra-ui/react";
+// import React from "react";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 import CarDataSearch from "./components/CarDataSearch";
 
 function App() {
   return (
-    <Box h={"100vh"}>
+    // <Box h={"100vh"}>
+    <>
       <Box
         h={"8vh"}
         bg={"gray.700"}
@@ -14,8 +15,16 @@ function App() {
       >
         <Heading>Car Service&Data</Heading>
       </Box>
-      <CarDataSearch />
-    </Box>
+      <Box
+        h={"92vh"}
+        display={"flex"}
+        justifyContent={"center"}
+        // alignItems={"center"}
+      >
+        <CarDataSearch />
+      </Box>
+    </>
+    // </Box>
   );
 }
 

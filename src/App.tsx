@@ -4,7 +4,6 @@ import CarDataSearch from "./components/CarDataSearch";
 
 function App() {
   return (
-    // <Box h={"100vh"}>
     <>
       <Box
         h={"8vh"}
@@ -15,16 +14,10 @@ function App() {
       >
         <Heading>Car Service&Data</Heading>
       </Box>
-      <Box
-        h={"92vh"}
-        display={"flex"}
-        justifyContent={"center"}
-        // alignItems={"center"}
-      >
+      <Box h={"92vh"}>
         <CarDataSearch />
       </Box>
     </>
-    // </Box>
   );
 }
 

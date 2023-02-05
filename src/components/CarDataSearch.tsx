@@ -1,8 +1,8 @@
-import { Box, Button, Image, Input, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, Image, Input, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Car } from "../types/Car";
 import { api } from "../utils/api";
-import carPlateImg from "../images/car_plate.png";
+import carPlateImg from "../images/car_plate1.png";
 
 function CarDataSearch() {
   const { mutateAsync: mutateCar } = api.car.get.useMutation();
@@ -25,37 +25,52 @@ function CarDataSearch() {
   const carNumberLenghth = carNumber?.length;
   return (
     <>
+      {/* <Flex direction={"column"} bg={"pink"}> */}
       <Box
+        // bg={"blue"}
         boxSize={"sm"}
         display={"flex"}
-        justifyContent={"center"}
+        flexDirection={"column"}
+        justifyContent={"space-around"}
         alignItems={"center"}
-        bg={"red.600"}
       >
-        {/* <Image src={""}></Image> */}
         <Input
-          w={"50%"}
-          bg={"yellow"}
+          w={"89.5%"}
+          h={"21.5%"}
           min={5}
           max={8}
-          color={"black"}
+          textColor={"black"}
           value={carNumber}
+          textAlign={"center"}
+          bgImage={carPlateImg.src}
+          fontSize={"3xl"}
+          placeholder={"12-345-67"}
+          _placeholder={{ color: "black" }}
+          fontWeight={"bold"}
+          _focus={{ bg: carPlateImg.src }}
+          _hover={{ bg: carPlateImg.src }}
           id={"carNumber"}
-          name={"carNumber"}
           onChange={(e) => setCarNumber(e.target.value)}
         ></Input>
         <Button
-          isDisabled={!carNumber}
-          onClick={
-            handleSearch
-            // console.log(carNumber);
+          isDisabled={
+            !carNumber || carNumberLenghth! < 5 || carNumberLenghth! > 8
           }
-        ></Button>
+          onClick={handleSearch}
+        >
+          אישור
+        </Button>
         {(carNumberLenghth! < 5 || carNumberLenghth! > 8) && (
           <Text>מספר רכב צריך להיות בין 5-8 תווים</Text>
         )}
       </Box>
-      <Box>
+      <Grid
+        templateColumns="repeat(8, 1fr)"
+        templateRows="repeat(5,1fr)"
+        h={"100%"}
+        bg={"red"}
+        dir={"rtl"}
+      >
         <Text>{carData?.baalut}</Text>
         <Text>{carData?.degem_cd}</Text>
         <Text>{carData?.degem_manoa}</Text>
@@ -79,7 +94,8 @@ function CarDataSearch() {
         <Text>{carData?.tzeva_rechev}</Text>
         <Text>{carData?.zmig_ahori}</Text>
         <Text>{carData?.zmig_kidmi}</Text>
-      </Box>
+      </Grid>
+      {/* </Flex> */}
     </>
   );
 }

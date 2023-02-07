@@ -1,6 +1,7 @@
 // import React from "react";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import CarDataSearch from "./components/CarDataSearch";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Box h={"92vh"}>
         <CarDataSearch />
       </Box>
+      <ReactQueryDevtools />
     </>
   );
 }

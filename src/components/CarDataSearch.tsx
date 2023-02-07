@@ -14,14 +14,18 @@ import {
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import { Car } from "../types/Car";
+import { CarTechnicalInfo } from "../types/Car";
 import { api } from "../utils/api";
 import carPlateImg from "../images/car_plate1.png";
 import { useInViewport } from "react-in-viewport";
 
 function CarDataSearch() {
   const { mutateAsync: mutateCar } = api.car.get.useMutation();
+  const { mutateAsync: mutateCarTechnicalInfo } =
+    api.carTechnicalInfo.get.useMutation();
   const [carNumber, setCarNumber] = useState<string>();
   const [carData, setCarData] = useState<Car>();
+  const [carId, setCarId] = useState<number>();
   // const ref = useRef();
   // const { inViewport } = useInViewport(
   //   ref,
@@ -38,6 +42,19 @@ function CarDataSearch() {
         onSuccess(data) {
           console.log(data.data?.mispar_rechev);
           setCarData(data.data);
+          setCarId(data.data?._id);
+        },
+      }
+    );
+  };
+  const handleCarSearch = async () => {
+    await mutateCarTechnicalInfo(
+      {
+        _id: 1723963,
+      },
+      {
+        onSuccess(data) {
+          console.log(data.data);
         },
       }
     );

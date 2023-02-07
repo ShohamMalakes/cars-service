@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { z } from "zod";
-import { Res } from "../../../types/Car";
+import { Car, Res, Response } from "../../../types/Car";
 
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
 
@@ -12,9 +13,6 @@ export const carRouter = createTRPCRouter({
       );
 
       const data: Res = await res.json();
-
-      console.log(data.result.records[0]);
-
       return {
         data: data.result.records[0],
       };
@@ -24,18 +22,17 @@ export const carRouter = createTRPCRouter({
     return "you can now see this secret message!";
   }),
 });
-export const carInfoRouter = createTRPCRouter({
+export const carTechnicalInfoRouter = createTRPCRouter({
   get: publicProcedure
-    .input(z.object({ license_plate: z.string() }))
-    .mutation(async ({ input }) => {
+    .input(z.object({ _id: z.number() }))
+    .mutation(async () => {
       const res = await fetch(
-        `https://data.gov.il/api/3/action/datastore_search?resource_id=142afde2-6228-49f9-8a29-9b6c3a0cbe40&q=${input.license_plate}`
+        `https://data.gov.il/api/3/action/datastore_search?resource_id=142afde2-6228-49f9-8a29-9b6c3a0cbe40&q=73111`
       );
 
-      const data: Res = await res.json();
+      const data: Response = await res.json();
 
-      console.log(data.result.records[0]);
-
+      console.log(data);
       return {
         data: data.result.records[0],
       };

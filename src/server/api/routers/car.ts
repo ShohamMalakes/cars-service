@@ -10,17 +10,14 @@ export const carRouter = createTRPCRouter({
       const res = await fetch(
         `https://data.gov.il/api/3/action/datastore_search?resource_id=053cea08-09bc-40ec-8f7a-156f0677aff3&q=${input.license_plate}`
       );
-      
+
       const data: Res = await res.json();
       const response = await fetch(
-        "https://data.gov.il/api/3/action/datastore_search?resource_id=142afde2-6228-49f9-8a29-9b6c3a0cbe40",
-        body: JSON.parse({
-          "_id": '73127'
-        })
-        );
+        "https://data.gov.il/api/3/action/datastore_search?resource_id=142afde2-6228-49f9-8a29-9b6c3a0cbe40"
+      );
       return {
         data: data.result.records[0],
-        };
+      };
     }),
 
   getSecretMessage: protectedProcedure.query(() => {
